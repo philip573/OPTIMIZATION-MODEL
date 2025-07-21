@@ -105,6 +105,6 @@ jupyter notebook Loan_Default_Prediction.ipynb
  License
 This project is for educational purposes as part of the internship program and is not intended for commercial use.
 
-##output:
+#output
 
 [Image](https://github.com/user-attachments/assets/0aac8eb3-6e0d-4076-a1d0-673ff50f84f5)
