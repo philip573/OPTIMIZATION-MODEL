@@ -11,105 +11,128 @@ DURATION: 8 WEEKS
 
 MENTOR: NEELA SANTHOSH
 
-# Loan Default Prediction - Internship Project (Task 4)
+# 📦 Supply Chain Optimization – Internship Project (Task 4)
 
-This repository contains the complete implementation of a machine learning project aimed at predicting loan default using a classification model. This task was part of the CODTECH internship program and involved end-to-end data science workflow, including preprocessing, handling class imbalance, model training, evaluation, hyperparameter tuning, and threshold optimization.
-
----
-
-## 🔍 Problem Statement
-
-Financial institutions face losses due to borrowers defaulting on loans. The objective of this project is to build a model that accurately predicts whether a loan applicant is likely to default or not, helping lenders make informed decisions.
+This repository contains a full data science project focused on solving a supply chain optimization problem using Linear Programming. This project was assigned during my internship at CODTECH and involves minimizing the total shipping cost for a distribution network of warehouses and customers.
 
 ---
 
-## 📁 Dataset
+## 🎯 Objective
 
-The dataset used contains anonymized information about borrowers and their loans, with the target variable `Default` indicating whether the borrower defaulted (1) or not (0).
-
-**Features include:**
-- Age
-- Income
-- Credit Score
-- Employment Type
-- Marital Status
-- Education
-- Loan Amount
-- Loan Purpose
-- Loan Term
-- Debt-to-Income Ratio (DTI)
-- Has Mortgage, Dependents, Co-Signer (binary features)
+To **minimize the total transportation cost** of delivering products from multiple warehouses to customer zones while meeting demand and respecting warehouse capacity constraints using optimization techniques.
 
 ---
 
-## 🧪 Workflow
+## 🛒 Problem Statement
 
-### 1. **Data Preprocessing**
-- Loaded CSV using `pandas`
-- Handled missing values
-- Encoded categorical variables using Label Encoding and One-Hot Encoding
-- Feature scaling using `StandardScaler`
-- Dropped irrelevant columns (`LoanID`)
+We are given:
+- **3 warehouses** with different capacities
+- **4 customer zones** with fixed product demand
+- **Transportation cost** (per unit) between each warehouse and customer zone
 
-### 2. **EDA (Exploratory Data Analysis)**
-- Analyzed class distribution of `Default`
-- Visualized distribution of categorical features
-
-### 3. **Train-Test Split**
-- Used `train_test_split` with `stratify=y` to maintain class balance
-
-### 4. **Handling Imbalance**
-- Applied **SMOTE** (Synthetic Minority Oversampling Technique) to balance the target classes
-
-### 5. **Modeling**
-- Base model: `RandomForestClassifier`
-- Improved model with **Hyperparameter Tuning** using `GridSearchCV`
-- Evaluated using classification report and confusion matrix
-
-### 6. **Threshold Optimization**
-- Calculated F1 scores for thresholds from 0.1 to 0.55
-- Found optimal threshold = **0.40** for better recall on class 1
+The goal is to determine the **optimal quantity of goods** to transport from each warehouse to each customer zone **at the lowest cost**, while:
+- Satisfying all customer demands
+- Not exceeding warehouse capacities
 
 ---
 
-## 📈 Results
+## 📈 Dataset
 
-### ✅ **Best Parameters from Grid Search**
-```python
-{'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
-| Metric    | Class 0 | Class 1 |
-| --------- | ------- | ------- |
-| Precision | 0.93    | 0.24    |
-| Recall    | 0.78    | 0.54    |
-| F1-Score  | 0.85    | 0.34    |
-| Accuracy  | 0.75    |         |
-🛠️ Tech Stack
-Python
+A manually constructed dataset was used in the form of dictionaries and matrices:
+- `costs`: Matrix containing unit cost from each warehouse to each customer zone
+- `warehouse_supply`: List of total units available at each warehouse
+- `customer_demand`: List of total units required by each customer zone
 
-Pandas, NumPy
+---
 
-Scikit-learn
+## 🔧 Tools & Libraries
 
-Matplotlib, Seaborn
+- Python
+- **PuLP** – for defining and solving the linear programming problem
+- Pandas & NumPy – for data organization and manipulation
+- Matplotlib & Seaborn – for visualizing transportation plans (optional)
 
-Imbalanced-learn (SMOTE)
- Project Structure:
-loan-default-prediction/
+---
+
+## 🔄 Methodology
+
+### 1. Define Decision Variables
+Let `x[i][j]` be the quantity shipped from warehouse `i` to customer `j`.
+
+### 2. Objective Function
+Minimize:
+Total Cost = Σ (x[i][j] * cost[i][j]) over all i and j
+
+### 3. Constraints
+- **Demand constraints**: For each customer zone, total goods received should meet demand.
+- **Supply constraints**: For each warehouse, total goods shipped should not exceed capacity.
+
+### 4. Solving
+Used `pulp.LpProblem` to define the optimization problem and `pulp.PULP_CBC_CMD()` as the solver.
+
+---
+
+## ✅ Results
+
+- **Optimal total cost**: ₹1125
+- The solver successfully assigned goods from warehouses to customer zones while satisfying all constraints.
+
+### 🗺️ Optimal Shipment Plan:
+
+| From → To      | C1 | C2 | C3 | C4 |
+|----------------|----|----|----|----|
+| **W1**         | 0  | 0  | 25 | 5  |
+| **W2**         | 15 | 25 | 5  | 5  |
+| **W3**         | 15 | 0  | 0  | 15 |
+
+---
+
+## 📊 Visualization
+
+A heatmap was used to visualize the optimal shipment matrix showing how much each warehouse sends to each customer zone.
+
+---
+
+## 📁 Project Structure
+
+supply-chain-optimization/
 │
-├── data/
-│   └── Loan_default.csv
-├── Loan_Default_Prediction.ipynb
+├── supply_chain_optimization.ipynb
 ├── README.md
-└── saved_model.pkl  # (Optional, if saved)
- How to Run
-Clone the repo
+└── requirements.txt # (optional)
 
-Install required libraries:
-pip install -r requirements.txt
-un the Jupyter Notebook:
-jupyter notebook Loan_Default_Prediction.ipynb
- License
-This project is for educational purposes as part of the internship program and is not intended for commercial use.
 
-#output
-[Image](https://github.com/user-attachments/assets/0aac8eb3-6e0d-4076-a1d0-673ff50f84f5)
+---
+
+## 📥 How to Run
+
+1. Clone this repository
+2. Install dependencies:
+
+pip install pulp pandas numpy matplotlib seaborn
+
+3. Run the Jupyter notebook:
+jupyter notebook supply_chain_optimization.ipynb
+
+---
+
+## 📌 Deliverables
+
+- Problem formulation
+- LP model using PuLP
+- Optimal shipment plan
+- Total cost analysis
+- Visualizations (matrix/heatmap)
+
+---
+
+## 🧠 Key Learnings
+
+- How to formulate and solve linear programming problems using Python
+- Real-world application of optimization in supply chains
+- Trade-offs between cost, capacity, and demand
+- How to visualize optimization results meaningfully
+
+
+
+
