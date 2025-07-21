@@ -1,10 +1,16 @@
 # OPTIMIZATION-MODEL
 COMPANY NAME: CODTECH IT SOLUTIONS
+
 NAME: STALLAN N PHILOS
+
 INTER ID:CT08DL10
+
 DOMAIN: DATA SCIENCE
+
 DURATION: 8 WEEKS
+
 MENTOR: NEELA SANTHOSH
+
 # Loan Default Prediction - Internship Project (Task 4)
 
 This repository contains the complete implementation of a machine learning project aimed at predicting loan default using a classification model. This task was part of the CODTECH internship program and involved end-to-end data science workflow, including preprocessing, handling class imbalance, model training, evaluation, hyperparameter tuning, and threshold optimization.
@@ -106,5 +112,4 @@ jupyter notebook Loan_Default_Prediction.ipynb
 This project is for educational purposes as part of the internship program and is not intended for commercial use.
 
 #output
-
 [Image](https://github.com/user-attachments/assets/0aac8eb3-6e0d-4076-a1d0-673ff50f84f5)
