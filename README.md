@@ -133,6 +133,10 @@ jupyter notebook supply_chain_optimization.ipynb
 - Trade-offs between cost, capacity, and demand
 - How to visualize optimization results meaningfully
 
+#OUTPUT
+
+![Image](https://github.com/user-attachments/assets/2141919e-5998-43db-893b-a51ff55e5304)
+
 
 
 
